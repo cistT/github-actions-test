@@ -9,4 +9,4 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - run: ${{ inputs.name }} called!
+      - run: echo ${{ inputs.name }} called!
