@@ -19,7 +19,8 @@ jobs:
       matrix:
         node: [test1, test2, test3]
     uses: ./.github/workflows/callee.yml
-    with: ${{ matrix.node }}
+    with:
+      name: ${{ matrix.node }}
 
     # runs-on:
     #   with: sanro
