@@ -9,4 +9,6 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ inputs.name }} called!
+      - run: |
+          mkdir ${{ inputs.name }}
+          mkdir ${{ inputs.name }}
