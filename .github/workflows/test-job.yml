@@ -4,8 +4,9 @@ on:
 
 jobs:
   steps:
+    name: 同時実行
     strategy:
-      fail-fast: true
+      fail-fast: false
       max-parallel: 2
       matrix:
         node:
@@ -16,8 +17,6 @@ jobs:
           - test5
           - test6
           - test7
-    name: 同時実行
-
     uses: ./.github/workflows/callee.yml
     with:
       name: ${{ matrix.node }}
