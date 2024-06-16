@@ -10,5 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          mkdir ${{ inputs.name }}
+          rm -r ${{ inputs.name }}
           mkdir ${{ inputs.name }}
