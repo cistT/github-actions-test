@@ -7,7 +7,13 @@ jobs:
     uses: ./.github/workflows/callee.yml
     with:
       name: taro
+
   call_reusable_workflow2:
     uses: ./.github/workflows/callee.yml
     with:
       name: jiro
+
+  steps:
+    uses: ./.github/workflows/callee.yml
+    with:
+      name: sanro
