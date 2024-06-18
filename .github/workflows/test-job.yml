@@ -17,9 +17,12 @@ jobs:
         id: find-dev-branches
         run: |
           git fetch --all
-          IFS="\n"
-          BRANCHES=$( git branch -r | grep "origin/dev/" | sed "s/origin\///")
+          IFS=","
+          BRANCHES=$( git branch -r | grep "origin/dev/" | sed "s/origin\///" | tr "\n" ",")
           read -r -a BRANCH_ARRAY <<< "$BRANCHES"
+          for element in "$BRANCH_ARRAY[@]"; do
+            echo $element
+          done
           echo "branches=$BRANCH_ARRAY" >> "$GITHUB_OUTPUT"
 
   test:
