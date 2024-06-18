@@ -19,7 +19,7 @@ jobs:
           git fetch --all
           BRANCHES=$( git branch -r | grep "origin/dev/" | sed "s/origin\///" | tr "\n" ",")
           IFS=", " read -r -a BRANCH_ARRAY <<< "$BRANCHES"
-          echo $BRANCH_ARRAY
+          echo $(BRANCH_ARRAY[@])
 
   # steps:
   #   name: 同時実行
