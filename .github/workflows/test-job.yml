@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        branch: ${{fromJson(need.set-matrix.outputs.branches)}}
+        branch: ${{fromJson(needs.set-matrix.outputs.branches)}}
     steps:
       - name: print branch
         run: |
