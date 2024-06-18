@@ -19,19 +19,17 @@ jobs:
           git fetch --all
           BRANCHES=$( git branch -r | grep "origin/dev/" | sed "s/origin\///" | sed "s/ //g" | tr "\n" ",")
           IFS=, BRANCH_ARRAY=(${BRANCHES})
-          echo "branches=${BRANCH_ARRAY[@]}" >> "$GITHUB_OUTPUT"
+          echo "branches=(${BRANCH_ARRAY[@]})" >> "$GITHUB_OUTPUT"
 
   test:
     runs-on: ubuntu-latest
     needs: set-matrix
-    strategy:
-      fail-fast: false
-      matrix:
-        branch: ${{ fromJson(needs.set-matrix.outputs.branches) }}
+
     steps:
       - name: print branch
         run: |
-          echo ${{matrix.branch}}
+          printf "%s\n" "${{needs.set-matrix.outputs.branches[@]}}"
+          echo ${{needs.set-matrix.outputs.branches}}
 
   # steps:
   #   name: 同時実行
@@ -63,3 +61,8 @@ jobs:
   #           echo $element
   #         done
   #         echo "branches=$BRANCHES" >> "$GITHUB_OUTPUT"
+
+  #  strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       branch: ${{ fromJson(needs.set-matrix.outputs.branches) }}
