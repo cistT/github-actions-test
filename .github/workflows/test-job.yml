@@ -21,6 +21,18 @@ jobs:
           IFS="\n" read -r -a BRANCH_ARRAY <<< "$BRANCHES"
           echo "branches = $BRANCH_ARRAY" >> "$GITHUB_OUTPUT"
 
+  test:
+    runs-on: ubuntu-latest
+    needs: set-matrix
+    strategy:
+      fail-fast: false
+      matrix:
+        branch: ${{fromJson(need.set-matrix.outputs.branches)}}
+    steps:
+      - name: print branch
+        run: |
+          echo ${{matrix.branch}}
+
   # steps:
   #   name: 同時実行
   #   strategy:
