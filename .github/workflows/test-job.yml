@@ -28,7 +28,6 @@ jobs:
     steps:
       - name: print branch
         run: |
-          printf "%s\n" "${{needs.set-matrix.outputs.branches[@]}}"
           echo ${{needs.set-matrix.outputs.branches}}
 
   # steps:
