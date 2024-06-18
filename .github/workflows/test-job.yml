@@ -3,32 +3,37 @@ on:
   workflow_dispatch:
 
 jobs:
-  set-matrix:
-    runs-on: ubuntu-latest
-    outputs:
-      branches: ${{ steps.find-dev-branches.outputs.branches }}
-    steps:
-      - name: Checkout branches
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+  # set-matrix:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     branches: ${{ steps.find-dev-branches.outputs.branches }}
+  #   steps:
+  #     - name: Checkout branches
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
 
-      - name: Set branches
-        id: find-dev-branches
-        run: |
-          git fetch --all
-          BRANCHES=$( git branch -r | grep "origin/dev/" | sed "s/origin\///" | sed "s/ //g" | tr "\n" ",")
-          IFS=, BRANCH_ARRAY=(${BRANCHES})
-          echo "branches=(${BRANCH_ARRAY[@]})" >> "$GITHUB_OUTPUT"
+  #     - name: Set branches
+  #       id: find-dev-branches
+  #       run: |
+  #         git fetch --all
+  #         BRANCHES=$( git branch -r | grep "origin/dev/" | sed "s/origin\///" | sed "s/ //g" | tr "\n" ",")
+  #         IFS=, BRANCH_ARRAY=(${BRANCHES})
+  #         python -c "print('branches=')"
+  #         echo "branches=(${BRANCH_ARRAY[@]})" >> "$GITHUB_OUTPUT"
 
   test:
     runs-on: ubuntu-latest
     needs: set-matrix
-
+    strategy:
+      fail-fast: false
+      matrix:
+        branch:
+          - dev/*
     steps:
       - name: print branch
         run: |
-          echo ${{fromJson(needs.set-matrix.outputs.branches)}}
+          echo ${{needs.set-matrix.outputs.branches}}
 
   # steps:
   #   name: 同時実行
