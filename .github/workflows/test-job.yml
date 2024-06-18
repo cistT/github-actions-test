@@ -19,7 +19,7 @@ jobs:
           git fetch --all
           BRANCHES=$( git branch -r | grep "origin/dev/" | sed "s/origin\///" | sed "s/ //g" | tr "\n" ",")
           IFS=, BRANCH_ARRAY=(${BRANCHES})
-          echo "branches=$BRANCH_ARRAY" >> "$GITHUB_OUTPUT"
+          echo "IFS=, branches=(${BRANCHES})" >> "$GITHUB_OUTPUT"
 
   test:
     runs-on: ubuntu-latest
