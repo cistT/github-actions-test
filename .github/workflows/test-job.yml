@@ -9,7 +9,7 @@ jobs:
       branches: ${{ steps.find-dev-branches.outputs.branches }}
     steps:
       - name: Checkout branches
-        uses: actions/checkout@4
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
