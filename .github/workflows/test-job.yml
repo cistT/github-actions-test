@@ -17,6 +17,8 @@ jobs:
         id: find-dev-branches
         run: |
           git fetch --all
+          BRANCHES = $( git branch -r )
+          echo $BRANCHES
 
   # steps:
   #   name: 同時実行
