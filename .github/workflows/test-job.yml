@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: print branch
         run: |
-          echo ${{needs.set-matrix.outputs.branches}}
+          echo ${{fromJson(needs.set-matrix.outputs.branches)}}
 
   # steps:
   #   name: 同時実行
