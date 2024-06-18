@@ -3,25 +3,40 @@ on:
   workflow_dispatch:
 
 jobs:
-  steps:
-    name: 同時実行
-    strategy:
-      fail-fast: false
-      max-parallel: 2
-      matrix:
-        node:
-          - test1
-          - test2
-          - test3
-          - test4
-          - test5
-          - test6
-          - test7
-    uses: ./.github/workflows/callee.yml
-    with:
-      name: ${{ matrix.node }}
+  set-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      branches: ${{ steps.find-dev-branches.outputs.branches }}
+    steps:
+      - name: Checkout branches
+        uses: actions/checkout@4
+        with:
+          fetch-depth: 0
 
-    # runs-on:
-    #   with: sanro
-    # with:
-    #   name: sanro
+      - name: Set branches
+        id: find-dev-branches
+        run: |
+          git fetch --all
+
+  # steps:
+  #   name: 同時実行
+  #   strategy:
+  #     fail-fast: false
+  #     max-parallel: 2
+  #     matrix:
+  #       node:
+  #         - test1
+  #         - test2
+  #         - test3
+  #         - test4
+  #         - test5
+  #         - test6
+  #         - test7
+  #   uses: ./.github/workflows/callee.yml
+  #   with:
+  #     name: ${{ matrix.node }}
+
+  # runs-on:
+  #   with: sanro
+  # with:
+  #   name: sanro
