@@ -21,8 +21,8 @@ jobs:
           branch_array=$(printf "%s" "${BRANCHES[@]}" | jq -R . | jq -s . | jq -c)
           echo $branch_array
           echo $(echo '["hoge","fuga"]' | jq -c)
-          echo "branches=$branches_array" >> "$GITHUB_OUTPUT"
-          branches=$branches_array
+          echo "branches=$branch_array" >> "$GITHUB_OUTPUT"
+          branches=$branch_array
           echo $branches
   test:
     runs-on: ubuntu-latest
