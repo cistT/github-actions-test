@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.set-matrix.outputs.branches) }}
+      matrix: ${{ fromJSON(needs.set-matrix.outputs.branches) }}
     steps:
       - name: print branch
         run: |
