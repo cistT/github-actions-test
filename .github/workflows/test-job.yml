@@ -43,4 +43,4 @@ jobs:
       - name: create PR
         run: |
           export BRANCH_NAME="github-actions-test/${{matrix.branch}}__${{github.run_id}}"
-          git switch $BRANCH_NAME
+          git switch -c $BRANCH_NAME
