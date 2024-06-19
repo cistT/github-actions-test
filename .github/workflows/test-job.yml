@@ -44,3 +44,7 @@ jobs:
         run: |
           export BRANCH_NAME="github-actions-test/${{matrix.branch}}__${{github.run_id}}"
           git switch -c $BRANCH_NAME
+          echo "# xxx" >> TEST.md
+          git add TEST.md
+          git commit -m "first commit"
+          git push origin $BRANCH_NAME
