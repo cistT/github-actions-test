@@ -22,6 +22,8 @@ jobs:
           echo $branch_array
           echo $(echo '["hoge","fuga"]' | jq -c)
           echo "branches=$branches_array" >> "$GITHUB_OUTPUT"
+          branches=$branches_array
+          echo $branches
   test:
     runs-on: ubuntu-latest
     needs: set-matrix
