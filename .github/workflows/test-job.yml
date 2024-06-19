@@ -19,6 +19,7 @@ jobs:
           BRANCHES=$( git branch -r | grep -v HEAD | grep "origin/dev/" | sed "s/origin\///" | sed "s/ //g")
           branch_array=$(print "${BRANCHES[@]}" | jq -R . | jq -s .)
           branches_json=$(echo {"branch":"${branch_array}"} | tr '\n' ' ')
+          echo $branches_json
           echo "branches=$branches_json" >> "$GITHUB_OUTPUT"
   test:
     runs-on: ubuntu-latest
