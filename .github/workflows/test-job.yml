@@ -24,6 +24,7 @@ jobs:
           echo "branches=$branches_array" >> "$GITHUB_OUTPUT"
   test:
     runs-on: ubuntu-latest
+    needs: set-matrix
     strategy:
       fail-fast: false
       matrix:
