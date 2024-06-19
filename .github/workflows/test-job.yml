@@ -20,7 +20,6 @@ jobs:
           echo $BRANCHES
           branch_array=$(printf "%s" "${BRANCHES[@]}" | jq -R . | jq -s . | jq -c)
           echo $branch_array
-          echo $(echo '["hoge","fuga"]' | jq -c)
           echo "branches=$branch_array" >> "$GITHUB_OUTPUT"
           branches=$branch_array
           echo $branches
@@ -35,40 +34,8 @@ jobs:
       - name: print branch
         run: |
           echo ${{matrix.branch}}
-
-# | sed -e "s/[\n\r]\+//g"'
-# steps:
-#   name: 同時実行
-#   strategy:
-#     fail-fast: false
-#     max-parallel: 2
-#     matrix:
-#       node:
-#         - test1
-#         - test2
-#         - test3
-#         - test4
-#         - test5
-#         - test6
-#         - test7
-#   uses: ./.github/workflows/callee.yml
-#   with:
-#     name: ${{ matrix.node }}
-
-# runs-on:
-#   with: sanro
-# with:
-#   name: sanro
-
-# IFS=","
-#         BRANCHES=$( git branch -r | grep "origin/dev/" | sed "s/origin\///" | tr)
-#         read -r -a BRANCH_ARRAY <<< "$BRANCHES"
-#         for element in "$BRANCH_ARRAY[@]"; do
-#           echo $element
-#         done
-#         echo "branches=$BRANCHES" >> "$GITHUB_OUTPUT"
-
-#  strategy:
-#     fail-fast: false
-#     matrix:
-#       branch: ${{ fromJson(needs.set-matrix.outputs.branches) }}
+          echo ${{github.run_id}}
+      - name: create PR
+        run: |
+          export BRANCH_NAME="github-actions-test/${{matrix.branch}}__${{github.run_id}}"
+          git switch $BRANCH_NAME
