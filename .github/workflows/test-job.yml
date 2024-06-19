@@ -20,14 +20,14 @@ jobs:
           echo $BRANCHES
           branch_array=$(printf "%s" "${BRANCHES[@]}" | jq -R . | jq -s . | jq -c)
           echo $branch_array
-          branches_json=$(echo {"branch":"${branch_array}"})
-          echo $branches_json
-          echo "branches=$branches_json" >> "$GITHUB_OUTPUT"
+          echo $(echo '["hoge","fuga"]' | jq -c)
+          echo "branches=$branches_array" >> "$GITHUB_OUTPUT"
   test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix: ${{ fromJSON(needs.set-matrix.outputs.branches) }}
+      matrix:
+        branch: ${{ fromJSON(needs.set-matrix.outputs.branches) }}
     steps:
       - name: print branch
         run: |
