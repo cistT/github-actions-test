@@ -27,14 +27,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: set-matrix
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     branch: ${{ fromJSON(needs.set-matrix.outputs.branches) }}
+    strategy:
+      fail-fast: false
+      matrix:
+        branch: ${{ fromJSON(needs.set-matrix.outputs.branches) }}
     steps:
       - name: print branch
         run: |
-          echo ${{needs.set-matrix.outputs.branches}}
+          echo ${{matrix.branch}}
 
 # | sed -e "s/[\n\r]\+//g"'
 # steps:
