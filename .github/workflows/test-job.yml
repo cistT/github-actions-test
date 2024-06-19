@@ -35,6 +35,11 @@ jobs:
         run: |
           echo ${{matrix.branch}}
           echo ${{github.run_id}}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{matrix.branch}}
       - name: create PR
         run: |
           export BRANCH_NAME="github-actions-test/${{matrix.branch}}__${{github.run_id}}"
