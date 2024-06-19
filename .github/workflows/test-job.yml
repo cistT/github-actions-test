@@ -18,7 +18,7 @@ jobs:
           git fetch --all
           BRANCHES=$( git branch -r | grep -v HEAD | grep "origin/dev/" | sed "s/origin\///" | sed "s/ //g")
           echo $BRANCHES
-          branch_array=$(printf "%s" "${BRANCHES[@]}" | jq -R . | jq -s . | jq -c)
+          branch_array=$(printf "%s" "${BRANCHES[@]}" | jq -R . | jq -s .)
           echo $branch_array
           echo "branches=$branch_array" >> "$GITHUB_OUTPUT"
           branches=$branch_array
